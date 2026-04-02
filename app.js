@@ -161,3 +161,4 @@ app.listen(8080, function () {
   // Serve para inicializar a api para receber requisições
   console.log("API FUNCIONANDO E AGUARDANDO NOVAS REQUISIÇÕES ...");
 });
+
