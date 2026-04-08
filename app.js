@@ -35,11 +35,16 @@ app.use(cors(corsOptions)); // Configura as permissões da API através do CORS
 
 const estadosCidades = require("./modulo/manipulacao_.js"); //Import do Arquivo de funções
 
-//Criando ENDPOINTS para API
+//Criando ENDPOINTS para API--------------------------------------------------------------------------
 
 // filtra os dados dos estados filtrando pelo uf
-app.get("/v1/senai/dados/estado/:uf", function (request, response) {
-  let sigla = request.params.uf;
+app.get("/v1/senai/dados/estado/", function (request, response) {
+
+  //let sigla = request.params.uf;  // Recebe variavel UF através da URL separado pela
+  //let sigla = request.params.uf;
+
+  let sigla = request.query.uf; // Recebe a variavel UF via Query Params, que são variaveis encaminhadas após o simbolo de ?
+
   let estado = estadosCidades.getDadosEstado(sigla);
 
   if (estado.status) {
@@ -50,6 +55,7 @@ app.get("/v1/senai/dados/estado/:uf", function (request, response) {
     response.json({ mesage: "Estado Não Encontrado" });
   }
 });
+
 //  retorna dados da capital do estado filtrando pelo uf
 app.get("/v1/senai/capital/estado/:info", function (request, response) {
   let sigla = request.params.info;
